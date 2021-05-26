@@ -1,49 +1,48 @@
-import React, {Component} from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import {auth, handleUserProfile} from './firebase/utils'
+import React, { Component } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { auth, handleUserProfile } from "./firebase/utils";
 
 //layouts
-import MainLayout from './layouts/MainLayout';
-import HomepageLayout from './layouts/HomepageLayout';
+import MainLayout from "./layouts/MainLayout";
+import HomepageLayout from "./layouts/HomepageLayout";
 
 //pages
-import Homepage from './pages/Homepage';
-import './default.scss';
-import Registration from './pages/Registration';
-import Login from './pages/Login';
-import Recovery from './pages/Recovery';
+import Homepage from "./pages/Homepage";
+import "./default.scss";
+import Registration from "./pages/Registration";
+import Login from "./pages/Login";
+import Recovery from "./pages/Recovery";
 
 const initialState = {
-  currentUser: null
+  currentUser: null,
 };
-
 
 class App extends Component {
   constructor(props) {
-    super(props) ;
+    super(props);
     this.state = {
-      ...initialState
+      ...initialState,
     };
   }
 
   authListner = null;
 
   componentDidMount() {
-    this.authListner = auth.onAuthStateChanged(async userAuth => {
+    this.authListner = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await handleUserProfile(userAuth);
-        userRef.onSnapshot(snapshot => {
+        userRef.onSnapshot((snapshot) => {
           this.setState({
             currentUser: {
               id: snapshot.id,
-              ...snapshot.data()
-            }
-          })
-        })
+              ...snapshot.data(),
+            },
+          });
+        });
       }
       this.setState({
-        ...initialState
-      })
+        ...initialState,
+      });
     });
   }
 
@@ -52,8 +51,8 @@ class App extends Component {
   }
 
   render() {
-    const {currentUser} = this.state;
-    
+    const { currentUser } = this.state;
+
     return (
       <div className="App">
         <Switch>
@@ -68,11 +67,15 @@ class App extends Component {
           ></Route>
           <Route
             path="/registration"
-            render={() => currentUser ? <Redirect to="/" /> : (
-              <MainLayout currentUser={currentUser}>
-                <Registration></Registration>
-              </MainLayout>
-            )}
+            render={() =>
+              currentUser ? (
+                <Redirect to="/" />
+              ) : (
+                <MainLayout currentUser={currentUser}>
+                  <Registration></Registration>
+                </MainLayout>
+              )
+            }
           ></Route>
           <Route
             path="/login"
@@ -86,11 +89,13 @@ class App extends Component {
               )
             }
           ></Route>
-          <Route path="/recovery" render={() => (
-            <MainLayout>
-              <Recovery />
-            </MainLayout>
-          )}
+          <Route
+            path="/recovery"
+            render={() => (
+              <MainLayout>
+                <Recovery />
+              </MainLayout>
+            )}
           />
         </Switch>
       </div>
