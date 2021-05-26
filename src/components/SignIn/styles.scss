@@ -1,3 +1,9 @@
+.loginbtn .loginbtntext,
+.btn-register {
+  color: #fff;
+  text-decoration: none;
+}
+
 .socialSignin {
   margin: 0.5rem auto 0;
 }
@@ -22,7 +28,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  min-height: 100vh;
+  min-height: 90vh;
 }
 
 .form-holder .form-content {
@@ -42,7 +48,7 @@
 
 .form-content .form-items {
   border: 3px solid #fff;
-  background: linear-gradient(300deg, #e7db97 0%, #e7b797 50%);
+  background: #c4b6b6;
   padding: 40px;
   display: inline-block;
   width: 100%;
