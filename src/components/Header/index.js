@@ -11,7 +11,30 @@ const Header = (props) => {
     <div className="fixed-top main-nav">
       <nav className="navbar navbar-expand-lg navbar-dark py-1 ">
         <div className="container-fluid ">
-          <div>
+          <div className="callToActions">
+            {currentUser && (
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
+                <li>
+                  <Link
+                    className="btn btn-sm btn-light mt-2 "
+                    onClick={() => auth.signOut()}
+                  >
+                    Logout
+                  </Link>
+                </li>
+              </ul>
+            )}
+            {!currentUser && (
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
+                <li>
+                  <Link className="btn btn-sm btn-light mt-2 " to="/login">
+                    Register/Login
+                  </Link>
+                </li>
+              </ul>
+            )}
+          </div>
+          {/* <div>
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
               <li className="nav-item mx-2">
                 <Link class="btn btn-sm btn-light mt-2 " to="/login">
@@ -19,7 +42,7 @@ const Header = (props) => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </nav>
       <header className="py-1 mb-4 border-bottom">
