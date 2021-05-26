@@ -14,7 +14,7 @@ const Directory = props => {
                     }}
                 >
                     <a>
-                        Shop Womens
+                        Shop
                     </a>
                 </div>
                 <div
@@ -24,7 +24,7 @@ const Directory = props => {
                     }}
                 >
                     <a>
-                        Shop Mens
+                        Sell
                     </a>
                 </div>
             </div>
