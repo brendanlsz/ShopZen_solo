@@ -46,7 +46,7 @@ const Header = (props) => {
         </div>
       </nav>
       <header className="py-1 mb-4 border-bottom">
-        <div className="container d-flex flex-wrap justify-content-center">
+        <div className="container d-flex flex-wrap justify-content-start">
           <div className="navbar-brand col-xs">
             <Link to="/">
               <img id="logo" src={logo} alt="..." />
