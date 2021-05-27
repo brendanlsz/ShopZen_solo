@@ -70,8 +70,7 @@ class SignUp extends Component {
     };
 
     return (
-      // <AuthWrapper {...configAuthWrapper}>
-      <div className="formWrap">
+      <AuthWrapper {...configAuthWrapper}>
         {errors.length > 0 && (
           <ul>
             {errors.map((err, index) => {
@@ -79,52 +78,39 @@ class SignUp extends Component {
             })}
           </ul>
         )}
-
-        <div class="form-body">
-          <div class="row">
-            <div class="form-holder">
-              <div class="form-content">
-                <div class="form-items">
-                  <h3>Registration</h3>
-                  <p>Fill in the data below.</p>
-                  <form>
-                    <FormInput
-                      type="text"
-                      name="displayName"
-                      value={displayName}
-                      placeholder="Full Name"
-                      onChange={this.handleChange}
-                    />
-                    <FormInput
-                      type="email"
-                      name="email"
-                      value={email}
-                      placeholder="Email"
-                      onChange={this.handleChange}
-                    />
-                    <FormInput
-                      type="password"
-                      name="password"
-                      value={password}
-                      placeholder="Password"
-                      onChange={this.handleChange}
-                    />
-                    <FormInput
-                      type="password"
-                      name="confirmPassword"
-                      value={confirmPassword}
-                      placeholder="Confirm Password"
-                      onChange={this.handleChange}
-                    />
-                    <Button type="submit">Register</Button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      // </AuthWrapper>
+        <p>Fill in the data below.</p>
+        <form>
+          <FormInput
+            type="text"
+            name="displayName"
+            value={displayName}
+            placeholder="Full Name"
+            onChange={this.handleChange}
+          />
+          <FormInput
+            type="email"
+            name="email"
+            value={email}
+            placeholder="Email"
+            onChange={this.handleChange}
+          />
+          <FormInput
+            type="password"
+            name="password"
+            value={password}
+            placeholder="Password"
+            onChange={this.handleChange}
+          />
+          <FormInput
+            type="password"
+            name="confirmPassword"
+            value={confirmPassword}
+            placeholder="Confirm Password"
+            onChange={this.handleChange}
+          />
+          <Button type="submit">Register</Button>
+        </form>
+      </AuthWrapper>
     );
   }
 }

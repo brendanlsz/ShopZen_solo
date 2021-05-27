@@ -64,8 +64,7 @@ class EmailPassword extends Component {
     };
 
     return (
-      //   <AuthWrapper {...configAuthWrapper}>
-      <div className="formWrap">
+      <AuthWrapper {...configAuthWrapper}>
         {errors.length > 0 && (
           <ul>
             {errors.map((e, index) => {
@@ -73,31 +72,20 @@ class EmailPassword extends Component {
             })}
           </ul>
         )}
-        <div class="form-body">
-          <div class="row">
-            <div class="form-holder">
-              <div class="form-content">
-                <div class="form-items">
-                  <h1>Password Reset</h1>
-                  <p>Enter email to reset password</p>
-                  <form onSubmit={this.handleSubmit}>
-                    <FormInput
-                      type="email"
-                      name="email"
-                      value={email}
-                      placeholder="Email"
-                      onChange={this.handleChange}
-                    />
 
-                    <Button type="submit">Email Password</Button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      //   </AuthWrapper>
+        <p>Enter email to reset password</p>
+        <form onSubmit={this.handleSubmit}>
+          <FormInput
+            type="email"
+            name="email"
+            value={email}
+            placeholder="Email"
+            onChange={this.handleChange}
+          />
+
+          <Button type="submit">Email Password</Button>
+        </form>
+      </AuthWrapper>
     );
   }
 }
