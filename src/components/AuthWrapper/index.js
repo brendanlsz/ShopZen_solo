@@ -4,11 +4,11 @@ import "./styles.scss";
 const AuthWrapper = ({ headline, children }) => {
   return (
     <div className="formwrap">
-      <div class="form-body">
-        <div class="row">
-          <div class="form-holder">
-            <div class="form-content">
-              <div class="form-items">
+      <div className="form-body">
+        <div className="row">
+          <div className="form-holder">
+            <div className="form-content">
+              <div className="form-items">
                 {headline && <h3>{headline}</h3>}
                 <div className="children">{children && children}</div>
               </div>

@@ -37,7 +37,7 @@ const Header = (props) => {
           {/* <div>
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
               <li className="nav-item mx-2">
-                <Link class="btn btn-sm btn-light mt-2 " to="/login">
+                <Link className="btn btn-sm btn-light mt-2 " to="/login">
                   Register/Login
                 </Link>
               </li>

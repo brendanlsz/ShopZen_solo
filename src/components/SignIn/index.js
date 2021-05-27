@@ -71,12 +71,12 @@ class SignIn extends Component {
           <p>
             Forgot password? Reset it <Link to="/recovery">here</Link>
           </p>
-          <div class="form-button mt-3 d-flex justify-content-center">
+          <div className="form-button mt-3 d-flex justify-content-center">
             <Buttons id="submit" type="submit">
               Login
             </Buttons>
           </div>
-          <div class="col-md-12 mt-3 d-flex justify-content-center">
+          <div className="col-md-12 mt-3 d-flex justify-content-center">
             <button
               onClick={signInWithGoogle}
               type="button"
@@ -87,9 +87,9 @@ class SignIn extends Component {
             <button
               type="button"
               onClick={signInWithGoogle}
-              class="btn btn-danger loginbtn mx-2"
+              className="btn btn-danger loginbtn mx-2"
             >
-              <Link class="loginbtntext" to="/">
+              <Link className="loginbtntext" to="/">
                 Login with Facebook
               </Link>
             </button>
@@ -101,7 +101,7 @@ class SignIn extends Component {
             </p>
           </div>
           <div className="d-flex justify-content-center">
-            <Link class="btn btn-lg btn-warning" to="/registration">
+            <Link className="btn btn-lg btn-warning" to="/registration">
               Register Here
             </Link>
           </div>

@@ -60,9 +60,9 @@ class App extends Component {
             exact
             path="/"
             render={() => (
-              <HomepageLayout currentUser={currentUser}>
+              <MainLayout currentUser={currentUser}>
                 <Homepage></Homepage>
-              </HomepageLayout>
+              </MainLayout>
             )}
           ></Route>
           <Route

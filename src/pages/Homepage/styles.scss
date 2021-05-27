@@ -1,3 +1,27 @@
-.homepage {
-    height: calc(100% - 3.5rem - 1.5rem);
+.main-block {
+  // background: linear-gradient(
+  //   300deg,
+  //   #e7db97 0%,
+  //   #e7b797 50%,
+  //   #ddd 50%,
+  //   #ddd 100%
+  // );
+  /* Full height */
+  min-height: 100vh;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.buyer-block {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.seller-block {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
