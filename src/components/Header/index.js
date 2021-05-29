@@ -50,7 +50,12 @@ const Header = (props) => {
           <ul>
             <li>
               <Link to="/cart">
-                Your Cart {totalNumCartItems !== 0 ? totalNumCartItems : ""}
+                Your Cart{" "}
+                {totalNumCartItems !== 0 ? (
+                  <span>({totalNumCartItems})</span>
+                ) : (
+                  ""
+                )}
                 <i className="fas fa-shopping-basket"></i>
               </Link>
             </li>
