@@ -12,6 +12,7 @@ import AuthWrapper from "./../AuthWrapper";
 import FormInput from "./../forms/FormInput";
 import Buttons from "./../forms/Button";
 
+import googleLogo from "./../../assets/google-logo.png";
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
 });
@@ -78,9 +79,10 @@ const SignIn = (props) => {
           <p className="text-center my-4">Or</p>
           <div className="d-flex justify-content-center">
             <button
-              className="btn btn-lg btn-danger loginbtn"
+              className="btn btn-lg btn-outline-dark loginbtn"
               onClick={handleGoogleSignIn}
             >
+              <img src={googleLogo} alt="googlelogo"></img>
               Sign in with Google
             </button>
           </div>
