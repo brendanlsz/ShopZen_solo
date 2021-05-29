@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation  } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { signOutUserStart } from './../../redux/User/user.actions';
-import { selectCartItemsCount } from './../../redux/Cart/cart.selectors';
-import './styles.scss';
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { signOutUserStart } from "./../../redux/User/user.actions";
+import { selectCartItemsCount } from "./../../redux/Cart/cart.selectors";
+import "./styles.scss";
 
-import Logo from './../../assets/logo-mono.png';
+import Logo from "./../../assets/logo-mono.png";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
-  totalNumCartItems: selectCartItemsCount(state)
+  totalNumCartItems: selectCartItemsCount(state),
 });
 
-const Header = props => {
+const Header = (props) => {
   const location = useLocation();
   const [activeMenu, setActiveMenu] = useState(false);
   const dispatch = useDispatch();
@@ -35,29 +35,23 @@ const Header = props => {
           </Link>
         </div>
 
-        <nav className={`mainMenu ${activeMenu ? 'active' : ''}`}>
+        <nav className={`mainMenu ${activeMenu ? "active" : ""}`}>
           <ul>
             <li>
-              <Link to="/">
-                Home
-              </Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/search">
-                Search
-              </Link>
+              <Link to="/search">Search</Link>
             </li>
           </ul>
         </nav>
 
         <div className="callToActions">
-
           <ul>
-
             <li>
               <Link to="/cart">
-                Your Cart ({totalNumCartItems})
-                <i class="fas fa-shopping-basket"></i>
+                Your Cart {totalNumCartItems !== 0 ? totalNumCartItems : ""}
+                <i className="fas fa-shopping-basket"></i>
               </Link>
             </li>
 
@@ -65,29 +59,27 @@ const Header = props => {
               <li key={1}>
                 <Link to="/dashboard">
                   My Account
-                  <i class="fas fa-user-circle"></i>
+                  <i className="fas fa-user-circle"></i>
                 </Link>
               </li>,
               <li key={2}>
                 <span onClick={() => signOut()}>
                   LogOut
-                  <i class="fas fa-sign-out-alt"></i>
+                  <i className="fas fa-sign-out-alt"></i>
                 </span>
-              </li>
+              </li>,
             ]}
 
             {!currentUser && [
               <li key={1} className="hideOnMobile">
-                <Link to="/registration">
-                  Register
-                </Link>
+                <Link to="/registration">Register</Link>
               </li>,
               <li key={2}>
                 <Link to="/login">
                   Login
-                  <i class="fas fa-user-circle"></i>
+                  <i className="fas fa-user-circle"></i>
                 </Link>
-              </li>
+              </li>,
             ]}
 
             <li className="mobileMenu">
@@ -95,13 +87,7 @@ const Header = props => {
                 <i className="fas fa-bars"></i>
               </span>
             </li>
-
           </ul>
-
-
-
-
-
         </div>
       </div>
     </header>
@@ -109,7 +95,7 @@ const Header = props => {
 };
 
 Header.defaultProps = {
-  currentUser: null
+  currentUser: null,
 };
 
 export default Header;
