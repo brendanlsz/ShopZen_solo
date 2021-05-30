@@ -7,6 +7,8 @@ import "./styles.scss";
 
 import Logo from "./../../assets/logo-mono.png";
 
+import Searchbar from "./../Searchbar/index";
+
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
   totalNumCartItems: selectCartItemsCount(state),
@@ -36,18 +38,7 @@ const Header = (props) => {
             </Link>
           </div>
           <nav className={`mainMenu ${activeMenu ? "active" : ""}`}>
-            <div className="search">
-              <input
-                type="text"
-                className="search-input"
-                placeholder="Search..."
-                name=""
-              />{" "}
-              <a href="#" className="search-icon">
-                {" "}
-                <i class="fa fa-search"></i>{" "}
-              </a>{" "}
-            </div>
+            <Searchbar />
           </nav>
         </div>
 
