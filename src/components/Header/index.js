@@ -42,7 +42,7 @@ const Header = (props) => {
           </nav>
         </div>
 
-        <div className="callToActions d-flex mr-2">
+        <div className="callToActions d-flex">
           <ul>
             <li>
               <Link to="/cart">
