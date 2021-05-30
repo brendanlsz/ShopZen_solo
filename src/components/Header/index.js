@@ -28,25 +28,30 @@ const Header = (props) => {
 
   return (
     <header className="header">
-      <div className="wrap">
-        <div className="logo">
-          <Link to="/">
-            <img src={Logo} alt="SimpleTut LOGO" />
-          </Link>
+      <div className="wrap d-flex justify-content-between">
+        <div className="navWrap">
+          <div className="logo">
+            <Link to="/">
+              <img src={Logo} alt="SimpleTut LOGO" />
+            </Link>
+          </div>
+          <nav className={`mainMenu ${activeMenu ? "active" : ""}`}>
+            <div className="search">
+              <input
+                type="text"
+                className="search-input"
+                placeholder="Search..."
+                name=""
+              />{" "}
+              <a href="#" className="search-icon">
+                {" "}
+                <i class="fa fa-search"></i>{" "}
+              </a>{" "}
+            </div>
+          </nav>
         </div>
 
-        <nav className={`mainMenu ${activeMenu ? "active" : ""}`}>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/search">Search</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <div className="callToActions">
+        <div className="callToActions d-flex mr-2">
           <ul>
             <li>
               <Link to="/cart">

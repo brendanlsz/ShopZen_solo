@@ -36,7 +36,7 @@ hr {
   justify-content: center;
   align-items: center;
   text-align: center;
-  min-height: 80vh;
+  // min-height: 80vh;
   // max-width: 80vw;
 }
 
@@ -61,7 +61,7 @@ hr {
   padding: 40px;
   display: inline-block;
   width: 100%;
-  min-width: 540px;
+  // min-width: 80vw;
   // -webkit-border-radius: 10px;
   // -moz-border-radius: 10px;
   // border-radius: 10px;
@@ -169,10 +169,19 @@ hr {
   color: #2acc80;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 500px) {
   .formwrap {
     display: flex;
-    margin-top: 50vh;
-    margin-bottom: 50vh;
+    justify-content: center;
+  }
+
+  .form-content .form-items,
+  .form-holder,
+  .form-body {
+    min-width: 80vw;
+  }
+
+  .form-items {
+    padding: 2rem !important;
   }
 }
