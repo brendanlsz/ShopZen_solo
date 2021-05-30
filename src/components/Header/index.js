@@ -38,7 +38,7 @@ const Header = (props) => {
             </Link>
           </div>
           <nav className={`mainMenu ${activeMenu ? "active" : ""}`}>
-            <Searchbar />
+            <Searchbar></Searchbar>
           </nav>
         </div>
 
