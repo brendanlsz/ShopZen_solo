@@ -6,7 +6,7 @@ import {
   googleSignInStart,
 } from "./../../redux/User/user.actions";
 
-import { auth, firestore } from "./../../firebase/utils";
+import { firestore } from "./../../firebase/utils";
 import { fetchCart } from "./../../redux/Cart/cart.actions";
 
 import "./styles.scss";
@@ -31,8 +31,9 @@ const SignIn = (props) => {
     if (currentUser) {
       history.push("/");
       resetForm();
-      const userRef = firestore.collection("users").doc(`${currentUser}`);
-      userRef
+      firestore
+        .collection("users")
+        .doc(`${currentUser}`)
         .get()
         .then((doc) => {
           if (doc.exists) {
