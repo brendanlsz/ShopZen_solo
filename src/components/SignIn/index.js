@@ -20,30 +20,6 @@ const mapState = ({ user }) => ({
   currentUser: user.currentUser,
 });
 
-const handleFetchCart = () => {
-  const currentUser = auth.currentUser;
-  if (!currentUser) return;
-  const { uid } = currentUser;
-  const userRef = firestore.collection("users").doc(`${uid}`);
-  let cart;
-  userRef
-    .get()
-    .then((doc) => {
-      if (doc.exists) {
-        cart = doc.data().cart;
-        useDispatch(fetchCart(cart));
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such cart!");
-      }
-    })
-    .catch((error) => {
-      console.log("Error getting cart:", error);
-    });
-  console.log(cart);
-  return cart;
-};
-
 const SignIn = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -55,25 +31,21 @@ const SignIn = (props) => {
     if (currentUser) {
       history.push("/");
       resetForm();
-      const currentUser = auth.currentUser;
-      if (currentUser) {
-        const { uid } = currentUser;
-        const userRef = firestore.collection("users").doc(`${uid}`);
-        userRef
-          .get()
-          .then((doc) => {
-            if (doc.exists) {
-              const cart = doc.data().cart;
-              dispatch(fetchCart(cart));
-            } else {
-              // doc.data() will be undefined in this case
-              console.log("No such cart!");
-            }
-          })
-          .catch((error) => {
-            console.log("Error getting cart:", error);
-          });
-      }
+      const userRef = firestore.collection("users").doc(`${currentUser}`);
+      userRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            const cart = doc.data().cart;
+            dispatch(fetchCart(cart));
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such cart!");
+          }
+        })
+        .catch((err) => {
+          console.log("Error getting cart:", err);
+        });
     }
   }, [currentUser]);
 

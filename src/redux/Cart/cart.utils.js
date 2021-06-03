@@ -1,6 +1,4 @@
-import { handleUserCart, auth, firestore } from "./../../firebase/utils";
-import { useDispatch } from "react-redux";
-import { fetchCart as fetch_cart } from "./../../redux/Cart/cart.actions";
+import { handleUserCart } from "./../../firebase/utils";
 
 export const existingCartItem = ({ prevCartItems, nextCartItem }) => {
   return prevCartItems.find(

@@ -1,10 +1,8 @@
-import { fetchCart } from "../../firebase/utils";
 import cartTypes from "./cart.types";
 import {
   handleAddToCart,
   handleRemoveCartItem,
   handleReduceCartItem,
-  handleFetchCart,
 } from "./cart.utils";
 
 const INITIAL_STATE = {
