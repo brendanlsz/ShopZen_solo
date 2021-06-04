@@ -29,7 +29,6 @@ const SignIn = (props) => {
 
   useEffect(() => {
     if (currentUser) {
-      history.push("/");
       resetForm();
       firestore
         .collection("users")
@@ -47,6 +46,7 @@ const SignIn = (props) => {
         .catch((err) => {
           console.log("Error getting cart:", err);
         });
+      history.push("/");
     }
   }, [currentUser]);
 

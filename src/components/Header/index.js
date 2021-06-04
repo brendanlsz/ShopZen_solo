@@ -5,7 +5,7 @@ import { signOutUserStart } from "./../../redux/User/user.actions";
 import { selectCartItemsCount } from "./../../redux/Cart/cart.selectors";
 import "./styles.scss";
 
-import Logo from "./../../assets/logo-mono.png";
+import Logo from "./../../assets/logo-black.png";
 
 import Searchbar from "./../Searchbar/index";
 
