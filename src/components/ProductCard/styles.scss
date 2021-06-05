@@ -4,14 +4,17 @@
   margin: 2rem auto 2rem;
   padding: 2rem;
   background-color: rgb(255, 255, 255);
+
+  h1 {
+    overflow-wrap: break-word;
+  }
 }
 
 .mainSection {
+  display: flex;
   .thumbnail {
-    // display: block;
-    // width: 100%;
-    // margin: 2rem auto;
-
+    flex: 0 0 auto;
+    width: 33.3333333333%;
     img {
       width: 100%;
     }
@@ -20,6 +23,8 @@
 
   .productDetails {
     padding: 0 2rem 0 2rem;
+    flex: 0 0 auto;
+    width: 66.66666666667%;
     font-family: "Roboto", sans-serif;
 
     .productTitle {
@@ -27,7 +32,7 @@
         h1 {
           font-family: "Lato", sans-serif;
           margin-bottom: 2rem;
-          font-size: 4rem;
+          font-size: 2rem;
           text-transform: none;
         }
       }
@@ -80,3 +85,14 @@
     }
   }
 }
+
+@media only screen and (max-width: 800px) {
+  .mainSection {
+    .thumbnail {
+      width: 100%;
+    }
+  }
+}
+// .detailsSection {
+//   display: flex;
+// }

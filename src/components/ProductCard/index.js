@@ -42,12 +42,12 @@ const ProductCard = ({}) => {
 
   return (
     <div className="productCard ">
-      <div className="mainSection productSection d-flex">
+      <div className="mainSection productSection">
         <div className="row w-100">
-          <div className="thumbnail col-4">
+          <div className="thumbnail ">
             <img src={productThumbnail} alt="No thumbnail found" />
           </div>
-          <div className="productDetails col-8">
+          <div className="productDetails ">
             <ul className="">
               <div className="productTitle">
                 <li className="productName">
@@ -62,7 +62,7 @@ const ProductCard = ({}) => {
                   className="desc"
                   // dangerouslySetInnerHTML={{ _html: productDesc }}
                 />
-                {productDesc}
+                {productDesc === "" ? "No description given" : productDesc}
               </li>
 
               <li className="addToCart">
