@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signOutUserStart } from "./../../redux/User/user.actions";
 import { selectCartItemsCount } from "./../../redux/Cart/cart.selectors";
@@ -26,6 +26,7 @@ const Header = (props) => {
 
   useEffect(() => {
     setActiveMenu(false);
+    console.log(location);
   }, [location]);
 
   return (
@@ -34,7 +35,7 @@ const Header = (props) => {
         <div className="navWrap">
           <div className="logo">
             <Link to="/">
-              <img src={Logo} alt="SimpleTut LOGO" />
+              <img src={Logo} alt="ShopZen LOGO" />
             </Link>
           </div>
           <nav className={`mainMenu ${activeMenu ? "active" : ""}`}>
@@ -44,26 +45,25 @@ const Header = (props) => {
 
         <div className="callToActions d-flex">
           <ul>
-            <li>
-              <Link to="/cart">
-                Your Cart{" "}
-                {totalNumCartItems !== 0 ? (
-                  <span>({totalNumCartItems})</span>
-                ) : (
-                  ""
-                )}
-                <i className="fas fa-shopping-basket"></i>
-              </Link>
-            </li>
-
             {currentUser && [
               <li key={1}>
-                <Link to="/dashboard">
-                  My Account
-                  <i className="fas fa-user-circle"></i>
-                </Link>
+                <NavLink to="/cart">
+                  Your Cart{" "}
+                  {totalNumCartItems !== 0 ? (
+                    <span>({totalNumCartItems})</span>
+                  ) : (
+                    ""
+                  )}
+                  <i className="fas fa-shopping-basket"></i>
+                </NavLink>
               </li>,
               <li key={2}>
+                <NavLink to="/dashboard">
+                  My Account
+                  <i className="fas fa-user-circle"></i>
+                </NavLink>
+              </li>,
+              <li key={3}>
                 <span onClick={() => signOut()}>
                   LogOut
                   <i className="fas fa-sign-out-alt"></i>
@@ -72,14 +72,14 @@ const Header = (props) => {
             ]}
 
             {!currentUser && [
-              <li key={1} className="hideOnMobile">
-                <Link to="/registration">Register</Link>
+              <li key={1} className={"hideOnMobile"}>
+                <NavLink to="/registration">Register</NavLink>
               </li>,
               <li key={2}>
-                <Link to="/login">
+                <NavLink to="/login">
                   Login
                   <i className="fas fa-user-circle"></i>
-                </Link>
+                </NavLink>
               </li>,
             ]}
 

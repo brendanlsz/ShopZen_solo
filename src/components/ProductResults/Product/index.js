@@ -1,10 +1,15 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import Button from "./../../forms/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "./../../../redux/Cart/cart.actions";
 
+const mapState = (state) => ({
+  currentUser: state.user.currentUser,
+});
+
 const Product = (product, props) => {
+  const { currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
   const history = useHistory();
   const { documentID, productThumbnail, productName, productPrice } = product;
@@ -22,6 +27,10 @@ const Product = (product, props) => {
 
   const handleAddToCart = (product) => {
     if (!product) return;
+    if (!currentUser) {
+      alert("Please Log in or Register to start shopping");
+      return;
+    }
     dispatch(addProduct(product));
     history.push("/cart");
   };

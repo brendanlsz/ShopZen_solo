@@ -74,12 +74,21 @@
       // -moz-transform: translateY(-50%);
       // transform: translateY(-50%);
 
+      li .active {
+        text-decoration: underline;
+      }
+
       i {
         display: none;
       }
 
       ul {
         display: flex;
+      }
+
+      ul li a {
+        padding-top: 35%;
+        padding-bottom: 35%;
       }
 
       ul,

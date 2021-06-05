@@ -18,10 +18,11 @@
 }
 
 .product {
-  width: 33.333333333333333%;
+  background-color: #fff;
+  width: 30%;
   margin: 1rem 2rem 1rem 2rem;
   padding: 10px;
-  border: black solid 3px;
+  // border: black solid 3px;
   transition: all 0.2s ease-in-out;
 
   .thumb {
