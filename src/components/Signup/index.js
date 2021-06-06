@@ -7,6 +7,7 @@ import "./styles.scss";
 import AuthWrapper from "./../AuthWrapper";
 import FormInput from "./../forms/FormInput";
 import Button from "./../forms/Button";
+import Loader from "./../forms/Loader";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
@@ -22,6 +23,7 @@ const Signup = (props) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [registering, setRegistering] = useState(false);
 
   useEffect(() => {
     if (currentUser) {
@@ -33,6 +35,7 @@ const Signup = (props) => {
   useEffect(() => {
     if (Array.isArray(userErr) && userErr.length > 0) {
       setErrors(userErr);
+      setRegistering(false);
     }
   }, [userErr]);
 
@@ -42,10 +45,12 @@ const Signup = (props) => {
     setPassword("");
     setConfirmPassword("");
     setErrors([]);
+    setRegistering(false);
   };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+    setRegistering(true);
     dispatch(
       signUpUserStart({
         displayName,
@@ -63,20 +68,23 @@ const Signup = (props) => {
   return (
     <AuthWrapper {...configAuthWrapper}>
       <div>
-        {errors.length > 0 && (
-          <ul>
-            {errors.map((err, index) => {
-              return <li key={index}>{err}</li>;
-            })}
-          </ul>
-        )}
+        <div className="errors">
+          {errors.length > 0 && (
+            <ul>
+              {errors.map((err, index) => {
+                return <li key={index}>{err}</li>;
+              })}
+            </ul>
+          )}
+        </div>
 
         <form onSubmit={handleFormSubmit}>
           <FormInput
             type="text"
             name="displayName"
             value={displayName}
-            placeholder="Full name"
+            placeholder="Username"
+            required
             handleChange={(e) => setDisplayName(e.target.value)}
           />
 
@@ -85,6 +93,7 @@ const Signup = (props) => {
             name="email"
             value={email}
             placeholder="Email"
+            required
             handleChange={(e) => setEmail(e.target.value)}
           />
 
@@ -93,6 +102,8 @@ const Signup = (props) => {
             name="password"
             value={password}
             placeholder="Password"
+            minlength="6"
+            required
             handleChange={(e) => setPassword(e.target.value)}
           />
 
@@ -101,12 +112,17 @@ const Signup = (props) => {
             name="confirmPassword"
             value={confirmPassword}
             placeholder="Confirm Password"
+            minlength="6"
+            required
             handleChange={(e) => setConfirmPassword(e.target.value)}
           />
 
-          <div className="mt-3">
+          <div className={`mt-3 ${registering ? "hidden" : ""}`}>
             <Button type="submit">Register</Button>
           </div>
+          <Loader className={`${registering ? "" : "hidden"}`}>
+            Registering...
+          </Loader>
         </form>
 
         {/* <div className="links">
