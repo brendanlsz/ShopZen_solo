@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import { firestore } from "./../../firebase/utils";
+import { fetchCart } from "./../../redux/Cart/cart.actions";
 import {
   emailSignInStart,
   googleSignInStart,
 } from "./../../redux/User/user.actions";
-
-import { firestore } from "./../../firebase/utils";
-import { fetchCart } from "./../../redux/Cart/cart.actions";
 
 import "./styles.scss";
 
@@ -16,6 +15,7 @@ import FormInput from "./../forms/FormInput";
 import Buttons from "./../forms/Button";
 
 import googleLogo from "./../../assets/google-logo.png";
+
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
 });
@@ -29,24 +29,25 @@ const SignIn = (props) => {
 
   useEffect(() => {
     if (currentUser) {
-      console.log(currentUser);
       resetForm();
-      firestore
-        .doc(`users/${currentUser.id}`)
-        .get()
-        .then((doc) => {
-          console.log(doc);
-          if (doc.exists) {
-            const cart = doc.data().cart;
-            dispatch(fetchCart(cart));
-          } else {
-            // doc.data() will be undefined in this case
-            console.log("No such cart!");
-          }
-        })
-        .catch((err) => {
-          console.log("Error getting cart:", err);
-        });
+      // if (currentUser) {
+      //   firestore
+      //     .doc(`users/${currentUser.id}`)
+      //     .get()
+      //     .then((doc) => {
+      //       console.log(doc);
+      //       if (doc.exists) {
+      //         const cart = doc.data().cart;
+      //         dispatch(fetchCart(cart));
+      //       } else {
+      //         // doc.data() will be undefined in this case
+      //         console.log("No such cart!");
+      //       }
+      //     })
+      //     .catch((err) => {
+      //       console.log("Error getting cart:", err);
+      //     });
+      // }
       history.push("/");
     }
   }, [currentUser]);

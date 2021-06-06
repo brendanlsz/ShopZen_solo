@@ -62,5 +62,6 @@ export const handleReduceCartItem = ({ prevCartItems, cartItemToReduce }) => {
         }
       : cartItem
   );
+  handleUserCart(newCart);
   return newCart;
 };

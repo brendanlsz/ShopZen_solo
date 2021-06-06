@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation, NavLink } from "react-router-dom";
+import { Link, useLocation, NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signOutUserStart } from "./../../redux/User/user.actions";
 import { selectCartItemsCount } from "./../../redux/Cart/cart.selectors";
 import "./styles.scss";
+
+import { firestore } from "./../../firebase/utils";
+import { fetchCart } from "./../../redux/Cart/cart.actions";
 
 import Logo from "./../../assets/logo-black.png";
 
@@ -26,9 +29,28 @@ const Header = (props) => {
 
   useEffect(() => {
     setActiveMenu(false);
-    console.log(location);
   }, [location]);
 
+  useEffect(() => {
+    if (currentUser) {
+      firestore
+        .doc(`users/${currentUser.id}`)
+        .get()
+        .then((doc) => {
+          console.log(doc);
+          if (doc.exists) {
+            const cart = doc.data().cart;
+            dispatch(fetchCart(cart));
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such cart!");
+          }
+        })
+        .catch((err) => {
+          console.log("Error getting cart:", err);
+        });
+    }
+  }, [currentUser]);
   return (
     <header className="header">
       <div className="wrap d-flex justify-content-between">
