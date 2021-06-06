@@ -6,7 +6,8 @@ import { fetchCart } from "./../../redux/Cart/cart.actions";
 import {
   emailSignInStart,
   googleSignInStart,
-  resetUserState,
+  // resetUserState,
+  clearUserErrors,
 } from "./../../redux/User/user.actions";
 
 import "./styles.scss";
@@ -33,6 +34,12 @@ const SignIn = (props) => {
   const [loggingin, setLoggingin] = useState(false);
 
   useEffect(() => {
+    return () => {
+      dispatch(clearUserErrors());
+    };
+  }, []);
+
+  useEffect(() => {
     if (currentUser) {
       resetForm();
       history.push("/");
@@ -43,12 +50,15 @@ const SignIn = (props) => {
     if (Array.isArray(userErr) && userErr.length > 0) {
       setErrors(userErr);
       setLoggingin(false);
+    } else {
+      setErrors([]);
     }
   }, [userErr]);
 
   const resetForm = () => {
     setEmail("");
     setPassword("");
+    setErrors([]);
     setLoggingin(false);
   };
 

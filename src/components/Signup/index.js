@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { signUpUserStart } from "./../../redux/User/user.actions";
+import {
+  signUpUserStart,
+  clearUserErrors,
+} from "./../../redux/User/user.actions";
 import "./styles.scss";
 
 import AuthWrapper from "./../AuthWrapper";
@@ -26,6 +29,12 @@ const Signup = (props) => {
   const [registering, setRegistering] = useState(false);
 
   useEffect(() => {
+    return () => {
+      dispatch(clearUserErrors());
+    };
+  }, []);
+
+  useEffect(() => {
     if (currentUser) {
       reset();
       history.push("/");
@@ -36,6 +45,8 @@ const Signup = (props) => {
     if (Array.isArray(userErr) && userErr.length > 0) {
       setErrors(userErr);
       setRegistering(false);
+    } else {
+      setErrors([]);
     }
   }, [userErr]);
 
@@ -102,7 +113,7 @@ const Signup = (props) => {
             name="password"
             value={password}
             placeholder="Password"
-            minlength="6"
+            minLength="6"
             required
             handleChange={(e) => setPassword(e.target.value)}
           />
@@ -112,7 +123,7 @@ const Signup = (props) => {
             name="confirmPassword"
             value={confirmPassword}
             placeholder="Confirm Password"
-            minlength="6"
+            minLength="6"
             required
             handleChange={(e) => setConfirmPassword(e.target.value)}
           />
