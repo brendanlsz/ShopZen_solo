@@ -10,7 +10,7 @@ const Searchbar = () => {
         placeholder="Search..."
         name=""
       />{" "}
-      <a href="#" className="search-icon">
+      <a href="/" className="search-icon">
         {" "}
         <i className="fa fa-search"></i>{" "}
       </a>{" "}

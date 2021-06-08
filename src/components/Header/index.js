@@ -61,12 +61,32 @@ const Header = (props) => {
             </Link>
           </div>
           <nav className={`mainMenu ${activeMenu ? "active" : ""}`}>
-            <Searchbar></Searchbar>
+            <ul>
+              <li className="hideOnDesktop">
+                <NavLink className="navlink" to="/Search">
+                  Products
+                </NavLink>
+              </li>
+              <li className="hideOnDesktop">
+                <NavLink className="navlink" to="/Search">
+                  Buyer Requests
+                </NavLink>
+              </li>
+              <li className="searchbar">
+                <Searchbar></Searchbar>
+              </li>
+            </ul>
           </nav>
         </div>
 
         <div className="callToActions d-flex">
           <ul>
+            <li className="hideOnMobile">
+              <NavLink to="/search">Products</NavLink>
+            </li>
+            <li className="hideOnMobile">
+              <NavLink to="/requests">Buyer Requests</NavLink>
+            </li>
             {currentUser && [
               <li key={1}>
                 <NavLink to="/cart">
