@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import Button from "./../../forms/Button";
+import Button from "./../forms/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { addProduct } from "./../../../redux/Cart/cart.actions";
+import { addProduct } from "./../../redux/Cart/cart.actions";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,

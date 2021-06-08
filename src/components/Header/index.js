@@ -63,12 +63,12 @@ const Header = (props) => {
           <nav className={`mainMenu ${activeMenu ? "active" : ""}`}>
             <ul>
               <li className="hideOnDesktop">
-                <NavLink className="navlink" to="/Search">
+                <NavLink className="navlink" to="/products">
                   Products
                 </NavLink>
               </li>
               <li className="hideOnDesktop">
-                <NavLink className="navlink" to="/Search">
+                <NavLink className="navlink" to="/requests">
                   Buyer Requests
                 </NavLink>
               </li>
@@ -82,7 +82,7 @@ const Header = (props) => {
         <div className="callToActions d-flex">
           <ul>
             <li className="hideOnMobile">
-              <NavLink to="/search">Products</NavLink>
+              <NavLink to="/products">Products</NavLink>
             </li>
             <li className="hideOnMobile">
               <NavLink to="/requests">Buyer Requests</NavLink>

@@ -5,6 +5,8 @@ import { checkUserSession } from "./redux/User/user.actions";
 
 // components
 import AdminToolbar from "./components/AdminToolbar";
+import ManageProducts from "./components/ManageProducts";
+// import ManageRequests from "./components/ManageRequests";
 
 // hoc
 import WithAuth from "./hoc/withAuth";
@@ -18,7 +20,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 
 // pages
 import Homepage from "./pages/Homepage";
-import Search from "./pages/Search";
+import Products from "./pages/Products";
 import BuyerRequests from "./pages/BuyerRequest";
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
@@ -53,18 +55,18 @@ const App = (props) => {
         />
         <Route
           exact
-          path="/search"
+          path="/products"
           render={() => (
             <MainLayout>
-              <Search />
+              <Products />
             </MainLayout>
           )}
         />
         <Route
-          path="/search/:filterType"
+          path="/products/:filterType"
           render={() => (
             <MainLayout>
-              <Search />
+              <Products />
             </MainLayout>
           )}
         />
@@ -156,11 +158,24 @@ const App = (props) => {
           )}
         />
         <Route
+          exact
           path="/admin"
           render={() => (
             <WithAdminAuth>
               <AdminLayout>
-                <Admin />
+                <Admin></Admin>
+              </AdminLayout>
+            </WithAdminAuth>
+          )}
+        />
+        <Route
+          path="/admin/manageproducts"
+          render={() => (
+            <WithAdminAuth>
+              <AdminLayout>
+                <Admin>
+                  <ManageProducts />
+                </Admin>
               </AdminLayout>
             </WithAdminAuth>
           )}

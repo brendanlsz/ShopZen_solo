@@ -1,12 +1,11 @@
 import React from "react";
-import ProductResults from "./../../components/ProductResults";
+import RequestResults from "./../../components/RequestResults";
 
 const BuyerRequests = ({}) => {
   return (
     <div className="searchPage">
-      <ProductResults />
+      <RequestResults />
     </div>
   );
 };
-
 export default BuyerRequests;

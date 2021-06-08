@@ -16,7 +16,7 @@ const Directory = (props) => {
           }}
         >
           <h1 className="leftText">Here to Shop?</h1>
-          <Link className="btn btn-lg" to="/search/others">
+          <Link className="btn btn-lg" to="/products">
             View Products for Sale
           </Link>
         </div>
@@ -27,7 +27,7 @@ const Directory = (props) => {
           }}
         >
           <h1 className="rightText">Here to Sell?</h1>
-          <Link className="btn btn-lg" to="/search/electronics">
+          <Link className="btn btn-lg" to="/requests">
             View Buy Requests
           </Link>
         </div>

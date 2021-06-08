@@ -2,23 +2,24 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addProductStart,
-  fetchProductsStart,
-  deleteProductStart,
+  // fetchProductsStart,
+  // deleteProductStart,
 } from "./../../redux/Products/products.actions";
 import Modal from "./../../components/Modal";
 import FormInput from "./../../components/forms/FormInput";
 import FormSelect from "./../../components/forms/FormSelect";
 import Button from "./../../components/forms/Button";
-import LoadMore from "./../../components/LoadMore";
-import CKEditor from "ckeditor4-react";
+// import LoadMore from "./../../components/LoadMore";
+// import CKEditor from "ckeditor4-react";
 import "./styles.scss";
+// import { Children } from "react";
 
-const mapState = ({ productsData }) => ({
-  products: productsData.products,
-});
+// const mapState = ({ productsData }) => ({
+//   products: productsData.products,
+// });
 
 const Admin = (props) => {
-  const { products } = useSelector(mapState);
+  // const { products } = useSelector(mapState);
   const dispatch = useDispatch();
   const [hideModal, setHideModal] = useState(true);
   const [productCategory, setProductCategory] = useState("");
@@ -28,11 +29,11 @@ const Admin = (props) => {
   const [productDesc, setProductDesc] = useState("");
   const [productDetails, setProductDetails] = useState("");
 
-  const { data, queryDoc, isLastPage } = products;
+  // const { data, queryDoc, isLastPage } = products;
 
-  useEffect(() => {
-    dispatch(fetchProductsStart());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchProductsStart());
+  // }, []);
 
   const toggleModal = () => setHideModal(!hideModal);
 
@@ -70,18 +71,18 @@ const Admin = (props) => {
     }
   };
 
-  const handleLoadMore = () => {
-    dispatch(
-      fetchProductsStart({
-        startAfterDoc: queryDoc,
-        persistProducts: data,
-      })
-    );
-  };
+  // const handleLoadMore = () => {
+  //   dispatch(
+  //     fetchProductsStart({
+  //       startAfterDoc: queryDoc,
+  //       persistProducts: data,
+  //     })
+  //   );
+  // };
 
-  const configLoadMore = {
-    onLoadMoreEvt: handleLoadMore,
-  };
+  // const configLoadMore = {
+  //   onLoadMoreEvt: handleLoadMore,
+  // };
 
   return (
     <div className="admin">
@@ -89,6 +90,9 @@ const Admin = (props) => {
         <ul>
           <li>
             <Button onClick={() => toggleModal()}>Add new product</Button>
+          </li>
+          <li>
+            <Button onClick={() => toggleModal()}>Make a new request</Button>
           </li>
         </ul>
       </div>
@@ -164,7 +168,9 @@ const Admin = (props) => {
         </div>
       </Modal>
 
-      <div className="manageProducts">
+      <div className="content">{props.children}</div>
+
+      {/* <div className="manageProducts">
         <table border="0" cellPadding="0" cellSpacing="0">
           <tbody>
             <tr>
@@ -230,7 +236,7 @@ const Admin = (props) => {
             </tr>
           </tbody>
         </table>
-      </div>
+      </div> */}
     </div>
   );
 };

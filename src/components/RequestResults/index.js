@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { fetchProductsStart } from "./../../redux/Products/products.actions";
-import Product from "../Product";
+import Product from "../Request";
 import FormSelect from "./../forms/FormSelect";
 import LoadMore from "./../LoadMore";
 import "./styles.scss";
@@ -72,8 +72,7 @@ const ProductResults = ({}) => {
 
   return (
     <div className="products">
-      <h1>Browse Products</h1>
-
+      <h1>Browse Buyer Requests</h1>
       <FormSelect {...configFilters} />
 
       <div className="productResults">

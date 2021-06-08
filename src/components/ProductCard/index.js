@@ -8,7 +8,7 @@ import {
 import { addProduct } from "./../../redux/Cart/cart.actions";
 import Button from "./../forms/Button";
 import "./styles.scss";
-import Product from "./../ProductResults/Product/index.js";
+import Product from "./../Product";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
