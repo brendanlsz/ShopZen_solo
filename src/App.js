@@ -6,7 +6,7 @@ import { checkUserSession } from "./redux/User/user.actions";
 // components
 import AdminToolbar from "./components/AdminToolbar";
 import ManageProducts from "./components/ManageProducts";
-// import ManageRequests from "./components/ManageRequests";
+import ManageRequests from "./components/ManageRequests";
 
 // hoc
 import WithAuth from "./hoc/withAuth";
@@ -175,6 +175,18 @@ const App = (props) => {
               <AdminLayout>
                 <Admin>
                   <ManageProducts />
+                </Admin>
+              </AdminLayout>
+            </WithAdminAuth>
+          )}
+        />
+        <Route
+          path="/admin/managerequests"
+          render={() => (
+            <WithAdminAuth>
+              <AdminLayout>
+                <Admin>
+                  <ManageRequests />
                 </Admin>
               </AdminLayout>
             </WithAdminAuth>
