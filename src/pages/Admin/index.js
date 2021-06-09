@@ -7,6 +7,8 @@ import FormInput from "./../../components/forms/FormInput";
 import FormSelect from "./../../components/forms/FormSelect";
 import Button from "./../../components/forms/Button";
 
+import CKEditor from "ckeditor4-react";
+
 import "./styles.scss";
 
 const Admin = (props) => {
@@ -93,12 +95,12 @@ const Admin = (props) => {
     <div className="admin">
       <div className="callToActions">
         <ul>
-          <li>
+          <li key={0}>
             <Button onClick={() => toggleProductModal()}>
               Add new product
             </Button>
           </li>
-          <li>
+          <li key={1}>
             <Button onClick={() => toggleRequestModal()}>
               Make a new request
             </Button>
@@ -165,12 +167,9 @@ const Admin = (props) => {
               placeholder="Include any details or specification of item"
               handleChange={(e) => setProductDetails(e.target.value)} />*/}
             <label>Details/Specifications(Optional)</label>
-            <textarea
-              placeholder="Include any details or specification of item"
-              rows="5"
-              onChange={(e) => setProductDetails(e.target.value)}
+            <CKEditor
+              onChange={(evt) => setProductDetails(evt.editor.getData())}
             />
-
             <br />
             <Button type="submit">Add product</Button>
           </form>
@@ -231,11 +230,9 @@ const Admin = (props) => {
               placeholder="Short description of item requested"
             />
             <label>Details/Specifications(Optional)</label>
-            <textarea
-              placeholder="Include any extra details or specification of item requested"
-              rows="5"
-              onChange={(e) => setRequestDetails(e.target.value)}
-            />
+            {/* <CKEditor
+              onChange={(evt) => setRequestDetails(evt.editor.getData())}
+            /> */}
 
             <br />
             <Button type="submit">Add request</Button>

@@ -71,7 +71,16 @@ const RequestCard = ({}) => {
       </div>
       <div className="detailsSection requestSection">
         <h1>Specification/Details</h1>
-        <p>{requestDetails === "" ? "No details given" : requestDetails}</p>
+        {requestDesc === "" ? (
+          <span className="requestdetails">
+            <p>No details given</p>
+          </span>
+        ) : (
+          <span
+            className="requestdetails"
+            dangerouslySetInnerHTML={{ __html: requestDesc }}
+          ></span>
+        )}
       </div>
       <div className="requestSection recommendationSection">
         <h1>You might also like</h1>

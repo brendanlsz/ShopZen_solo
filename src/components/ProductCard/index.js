@@ -73,10 +73,10 @@ const ProductCard = ({}) => {
                   className="desc"
                   // dangerouslySetInnerHTML={{ _html: productDesc }}
                 /> */}
+                <p>Quantity left: 10</p>
                 <p>
                   {productDesc === "" ? "No description given" : productDesc}
                 </p>
-                <p>Quantity left: 10</p>
               </li>
 
               <li className="addToCart">
@@ -95,7 +95,16 @@ const ProductCard = ({}) => {
       </div>
       <div className="detailsSection productSection">
         <h1>Specification/Details</h1>
-        <p>{productDetails === "" ? "No details given" : productDetails}</p>
+        {productDesc === "" ? (
+          <span className="productdetails">
+            <p>No details given</p>
+          </span>
+        ) : (
+          <span
+            className="productdetails"
+            dangerouslySetInnerHTML={{ __html: productDesc }}
+          ></span>
+        )}
       </div>
       <div className="productSection recommendationSection">
         <h1>You might also like</h1>
