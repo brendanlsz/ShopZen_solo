@@ -4,6 +4,8 @@ import Button from "./../forms/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "./../../redux/Cart/cart.actions";
 
+import "./styles.scss";
+
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
 });

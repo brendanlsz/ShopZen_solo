@@ -1,41 +1,32 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { fetchProductsStart } from "./../../redux/Products/products.actions";
-import Product from "../Request";
+import { fetchRequestsStart } from "./../../redux/Requests/requests.actions";
+import Request from "../Request";
 import FormSelect from "./../forms/FormSelect";
 import LoadMore from "./../LoadMore";
 import "./styles.scss";
 
-const mapState = ({ productsData }) => ({
-  products: productsData.products,
+const mapState = ({ requestsData }) => ({
+  requests: requestsData.requests,
 });
 
 const ProductResults = ({}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { filterType } = useParams();
-  const { products } = useSelector(mapState);
+  const { requests } = useSelector(mapState);
 
-  const { data, queryDoc, isLastPage } = products;
+  const { data, queryDoc, isLastPage } = requests;
 
   useEffect(() => {
-    dispatch(fetchProductsStart({ filterType }));
+    dispatch(fetchRequestsStart({ filterType }));
   }, [filterType]);
 
   const handleFilter = (e) => {
     const nextFilter = e.target.value;
-    history.push(`/products/${nextFilter}`);
+    history.push(`/requests/${nextFilter}`);
   };
-
-  if (!Array.isArray(data)) return null;
-  if (data.length < 1) {
-    return (
-      <div className="products">
-        <p>No search results.</p>
-      </div>
-    );
-  }
 
   const configFilters = {
     defaultValue: filterType,
@@ -56,12 +47,23 @@ const ProductResults = ({}) => {
     handleChange: handleFilter,
   };
 
+  if (!Array.isArray(data)) return null;
+  if (data.length < 1) {
+    return (
+      <div className="requests">
+        <h1>Browse Buyer Requests</h1>
+        <FormSelect {...configFilters} />
+        <p>No search results.</p>
+      </div>
+    );
+  }
+
   const handleLoadMore = () => {
     dispatch(
-      fetchProductsStart({
+      fetchRequestsStart({
         filterType,
         startAfterDoc: queryDoc,
-        persistProducts: data,
+        persistRequests: data,
       })
     );
   };
@@ -71,25 +73,25 @@ const ProductResults = ({}) => {
   };
 
   return (
-    <div className="products">
+    <div className="requests">
       <h1>Browse Buyer Requests</h1>
       <FormSelect {...configFilters} />
 
-      <div className="productResults">
-        {data.map((product, pos) => {
-          const { productThumbnail, productName, productPrice } = product;
+      <div className="requestResults">
+        {data.map((request, pos) => {
+          const { requestThumbnail, requestName, requestPrice } = request;
           if (
-            !productThumbnail ||
-            !productName ||
-            typeof productPrice === "undefined"
+            !requestThumbnail ||
+            !requestName ||
+            typeof requestPrice === "undefined"
           )
             return null;
 
-          const configProduct = {
-            ...product,
+          const configRequest = {
+            ...request,
           };
 
-          return <Product key={pos} {...configProduct} />;
+          return <Request key={pos} {...configRequest} />;
         })}
       </div>
 

@@ -28,15 +28,6 @@ const ProductResults = ({}) => {
     history.push(`/products/${nextFilter}`);
   };
 
-  if (!Array.isArray(data)) return null;
-  if (data.length < 1) {
-    return (
-      <div className="products">
-        <p>No search results.</p>
-      </div>
-    );
-  }
-
   const configFilters = {
     defaultValue: filterType,
     options: [
@@ -55,6 +46,16 @@ const ProductResults = ({}) => {
     ],
     handleChange: handleFilter,
   };
+  if (!Array.isArray(data)) return null;
+  if (data.length < 1) {
+    return (
+      <div className="products">
+        <h1>Browse Products</h1>
+        <FormSelect {...configFilters} />
+        <p>No search results.</p>
+      </div>
+    );
+  }
 
   const handleLoadMore = () => {
     dispatch(

@@ -1,32 +1,29 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-const mapState = (state) => ({
-  currentUser: state.user.currentUser,
-});
+import "./styles.scss";
 
 const Request = (request, props) => {
   const {
     documentID,
-    productThumbnail,
-    productName,
-    productPrice,
-    productDesc,
+    requestThumbnail,
+    requestName,
+    requestPrice,
+    requestDesc,
   } = request;
   if (
     !documentID ||
-    !productThumbnail ||
-    !productName ||
-    typeof productPrice === "undefined"
+    !requestThumbnail ||
+    !requestName ||
+    typeof requestPrice === "undefined"
   )
     return null;
 
   return (
-    <div className="product" {...props}>
+    <div className="request" {...props}>
       <div className="thumb">
-        <Link to={`/product/${documentID}`}>
-          <img src={productThumbnail} alt={productName} />
+        <Link to={`/request/${documentID}`}>
+          <img src={requestThumbnail} alt={requestName} />
         </Link>
       </div>
 
@@ -34,18 +31,17 @@ const Request = (request, props) => {
         <ul>
           <li>
             <span className="name">
-              <Link to={`/product/${documentID}`}>{productName}</Link>
+              <Link to={`/request/${documentID}`}>{requestName}</Link>
             </span>
           </li>
           <li>
-            <span className="price">${productPrice}</span>
-          </li>
-          <li>
-            <div>
-              <span className="desc">{productDesc}</span>
-            </div>
+            <span className="price">${requestPrice}</span>
           </li>
         </ul>
+      </div>
+
+      <div className="description">
+        <span>{requestDesc}</span>
       </div>
     </div>
   );

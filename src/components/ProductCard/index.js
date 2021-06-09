@@ -95,14 +95,14 @@ const ProductCard = ({}) => {
       </div>
       <div className="detailsSection productSection">
         <h1>Specification/Details</h1>
-        <p>{productDetails}</p>
+        <p>{productDetails === "" ? "No details given" : productDetails}</p>
       </div>
       <div className="productSection recommendationSection">
         <h1>You might also like</h1>
         <div className="recList">
-          <Product className="recproduct col-4" {...product} />
-          <Product className="recproduct col-4" {...product} />
-          <Product className="recproduct col-4" {...product} />
+          <Product className="recproduct" {...product} />
+          <Product className="recproduct" {...product} />
+          <Product className="recproduct" {...product} />
         </div>
       </div>
     </div>

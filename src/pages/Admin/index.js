@@ -1,49 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addProductStart,
-  // fetchProductsStart,
-  // deleteProductStart,
-} from "./../../redux/Products/products.actions";
+import { addProductStart } from "./../../redux/Products/products.actions";
+import { addRequestStart } from "./../../redux/Requests/requests.actions";
 import Modal from "./../../components/Modal";
 import FormInput from "./../../components/forms/FormInput";
 import FormSelect from "./../../components/forms/FormSelect";
 import Button from "./../../components/forms/Button";
-// import LoadMore from "./../../components/LoadMore";
-// import CKEditor from "ckeditor4-react";
-import "./styles.scss";
-// import { Children } from "react";
 
-// const mapState = ({ productsData }) => ({
-//   products: productsData.products,
-// });
+import "./styles.scss";
 
 const Admin = (props) => {
-  // const { products } = useSelector(mapState);
   const dispatch = useDispatch();
-  const [hideModal, setHideModal] = useState(true);
+  const [hideProductModal, setHideProductModal] = useState(true);
+  const [hideRequestModal, setHideRequestModal] = useState(true);
   const [productCategory, setProductCategory] = useState("");
   const [productName, setProductName] = useState("");
   const [productThumbnail, setProductThumbnail] = useState("");
   const [productPrice, setProductPrice] = useState(0);
   const [productDesc, setProductDesc] = useState("");
   const [productDetails, setProductDetails] = useState("");
+  const [requestCategory, setRequestCategory] = useState("");
+  const [requestName, setRequestName] = useState("");
+  const [requestThumbnail, setRequestThumbnail] = useState("");
+  const [requestPrice, setRequestPrice] = useState(0);
+  const [requestDesc, setRequestDesc] = useState("");
+  const [requestDetails, setRequestDetails] = useState("");
 
-  // const { data, queryDoc, isLastPage } = products;
+  const toggleProductModal = () => setHideProductModal(!hideProductModal);
 
-  // useEffect(() => {
-  //   dispatch(fetchProductsStart());
-  // }, []);
+  const configProductModal = {
+    hideModal: hideProductModal,
+    toggleModal: toggleProductModal,
+  };
 
-  const toggleModal = () => setHideModal(!hideModal);
+  const toggleRequestModal = () => setHideRequestModal(!hideRequestModal);
 
-  const configModal = {
-    hideModal,
-    toggleModal,
+  const configRequestModal = {
+    hideModal: hideRequestModal,
+    toggleModal: toggleRequestModal,
   };
 
   const resetForm = () => {
-    setHideModal(true);
+    setHideProductModal(true);
+    setHideRequestModal(true);
     setProductCategory("");
     setProductName("");
     setProductThumbnail("");
@@ -52,7 +51,7 @@ const Admin = (props) => {
     setProductDetails("");
   };
 
-  const handleSubmit = (e) => {
+  const handleProductSubmit = (e) => {
     e.preventDefault();
     if (productCategory !== "") {
       dispatch(
@@ -71,35 +70,45 @@ const Admin = (props) => {
     }
   };
 
-  // const handleLoadMore = () => {
-  //   dispatch(
-  //     fetchProductsStart({
-  //       startAfterDoc: queryDoc,
-  //       persistProducts: data,
-  //     })
-  //   );
-  // };
-
-  // const configLoadMore = {
-  //   onLoadMoreEvt: handleLoadMore,
-  // };
+  const handleRequestSubmit = (e) => {
+    e.preventDefault();
+    if (requestCategory !== "") {
+      dispatch(
+        addRequestStart({
+          requestCategory,
+          requestName,
+          requestThumbnail,
+          requestPrice,
+          requestDesc,
+          requestDetails,
+        })
+      );
+      resetForm();
+    } else {
+      alert("Please choose a category");
+    }
+  };
 
   return (
     <div className="admin">
       <div className="callToActions">
         <ul>
           <li>
-            <Button onClick={() => toggleModal()}>Add new product</Button>
+            <Button onClick={() => toggleProductModal()}>
+              Add new product
+            </Button>
           </li>
           <li>
-            <Button onClick={() => toggleModal()}>Make a new request</Button>
+            <Button onClick={() => toggleRequestModal()}>
+              Make a new request
+            </Button>
           </li>
         </ul>
       </div>
 
-      <Modal {...configModal}>
-        <div className="addNewProductForm">
-          <form onSubmit={handleSubmit}>
+      <Modal {...configProductModal}>
+        <div className="addNewForm">
+          <form onSubmit={handleProductSubmit}>
             <h2>Add new product</h2>
             <FormInput
               label="Name"
@@ -168,75 +177,73 @@ const Admin = (props) => {
         </div>
       </Modal>
 
+      <Modal {...configRequestModal}>
+        <div className="addNewForm">
+          <form onSubmit={handleRequestSubmit}>
+            <h2>Add new request</h2>
+            <FormInput
+              label="Name"
+              placeholder="Name of Item Requested"
+              required
+              type="text"
+              value={requestName}
+              handleChange={(e) => setRequestName(e.target.value)}
+            />
+            <FormInput
+              label="Main image URL"
+              type="url"
+              placeholder="URL to image of item requested"
+              value={requestThumbnail}
+              handleChange={(e) => setRequestThumbnail(e.target.value)}
+            />
+            <FormInput
+              label="Price"
+              type="number"
+              min="0.00"
+              max="10000.00"
+              step="0.01"
+              placeholder="Amount Willing to pay"
+              value={requestPrice}
+              required
+              handleChange={(e) => setRequestPrice(e.target.value)}
+            />
+            <FormSelect
+              label="Category"
+              className="category"
+              required
+              options={[
+                {
+                  value: "electronics",
+                  name: "Electronics",
+                },
+                {
+                  value: "others",
+                  name: "Others",
+                },
+              ]}
+              handleChange={(e) => setRequestCategory(e.target.value)}
+            />
+            <FormInput
+              label="Description"
+              type="description"
+              required
+              handleChange={(evt) => setRequestDesc(evt.target.value)}
+              placeholder="Short description of item requested"
+            />
+            <label>Details/Specifications(Optional)</label>
+            <textarea
+              placeholder="Include any extra details or specification of item requested"
+              rows="5"
+              onChange={(e) => setRequestDetails(e.target.value)}
+            />
+
+            <br />
+            <Button type="submit">Add request</Button>
+          </form>
+        </div>
+      </Modal>
+
       <div className="content">{props.children}</div>
-
-      {/* <div className="manageProducts">
-        <table border="0" cellPadding="0" cellSpacing="0">
-          <tbody>
-            <tr>
-              <th>
-                <h1>Manage Products</h1>
-              </th>
-            </tr>
-            <tr>
-              <td>
-                <table
-                  className="results"
-                  border="0"
-                  cellPadding="10"
-                  cellSpacing="0"
-                >
-                  <tbody>
-                    {Array.isArray(data) &&
-                      data.length > 0 &&
-                      data.map((product, index) => {
-                        const {
-                          productName,
-                          productThumbnail,
-                          productPrice,
-                          documentID,
-                        } = product;
-
-                        return (
-                          <tr key={index}>
-                            <td>
-                              <img className="thumb" src={productThumbnail} />
-                            </td>
-                            <td>{productName}</td>
-                            <td>${productPrice}</td>
-                            <td>
-                              <Button
-                                onClick={() =>
-                                  dispatch(deleteProductStart(documentID))
-                                }
-                              >
-                                Delete
-                              </Button>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-            </tr>
-            <tr>
-              <td>
-                <table border="0" cellPadding="10" cellSpacing="0">
-                  <tbody>
-                    <tr>
-                      <td>{!isLastPage && <LoadMore {...configLoadMore} />}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div> */}
     </div>
   );
 };

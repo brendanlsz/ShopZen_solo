@@ -28,9 +28,11 @@ import Recovery from "./pages/Recovery";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import ProductDetails from "./pages/ProductDetails";
+import RequestDetails from "./pages/RequestDetails";
 import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
 import Order from "./pages/Order";
+
 import "./default.scss";
 
 const App = (props) => {
@@ -71,6 +73,14 @@ const App = (props) => {
           )}
         />
         <Route
+          path="/product/:productID"
+          render={() => (
+            <MainLayout>
+              <ProductDetails />
+            </MainLayout>
+          )}
+        />
+        <Route
           exact
           path="/requests"
           render={() => (
@@ -88,13 +98,14 @@ const App = (props) => {
           )}
         />
         <Route
-          path="/product/:productID"
+          path="/request/:requestID"
           render={() => (
             <MainLayout>
-              <ProductDetails />
+              <RequestDetails />
             </MainLayout>
           )}
         />
+
         <Route
           path="/cart"
           render={() => (
@@ -163,7 +174,9 @@ const App = (props) => {
           render={() => (
             <WithAdminAuth>
               <AdminLayout>
-                <Admin></Admin>
+                <Admin>
+                  <ManageProducts />
+                </Admin>
               </AdminLayout>
             </WithAdminAuth>
           )}
