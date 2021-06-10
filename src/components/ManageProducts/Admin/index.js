@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProductsStart,
   deleteProductStart,
-} from "./../../redux/Products/products.actions";
+} from "../../../redux/Products/products.actions";
 
-import LoadMore from "./../../components/LoadMore";
-import Button from "./../../components/forms/Button";
+import LoadMore from "../../LoadMore";
+import Button from "../../forms/Button";
 
 const mapState = ({ productsData }) => ({
   products: productsData.products,

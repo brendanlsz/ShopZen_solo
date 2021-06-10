@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchRequestsStart,
   deleteRequestStart,
-} from "./../../redux/Requests/requests.actions";
+} from "../../../redux/Requests/requests.actions";
 
-import LoadMore from "./../../components/LoadMore";
-import Button from "./../../components/forms/Button";
+import LoadMore from "../../LoadMore";
+import Button from "../../forms/Button";
 
 const mapState = ({ requestsData }) => ({
   requests: requestsData.requests,

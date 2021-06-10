@@ -3,6 +3,7 @@ import requestsTypes from "./requests.types";
 const INITIAL_STATE = {
   request: {},
   requests: [],
+  userRequests: [],
 };
 
 const requestsReducer = (state = INITIAL_STATE, action) => {
@@ -20,6 +21,11 @@ const requestsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         request: action.payload,
+      };
+    case requestsTypes.SET_USER_REQUESTS:
+      return {
+        ...state,
+        userRequests: action.payload,
       };
   }
 };

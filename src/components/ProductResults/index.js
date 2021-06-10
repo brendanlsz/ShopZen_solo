@@ -21,6 +21,7 @@ const ProductResults = ({}) => {
 
   useEffect(() => {
     dispatch(fetchProductsStart({ filterType }));
+    console.log(filterType);
   }, [filterType]);
 
   const handleFilter = (e) => {

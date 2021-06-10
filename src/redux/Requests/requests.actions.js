@@ -20,6 +20,11 @@ export const deleteRequestStart = (requestID) => ({
   payload: requestID,
 });
 
+export const fetchUserRequests = (userID) => ({
+  type: requestTypes.FETCH_USER_REQUESTS,
+  payload: userID,
+});
+
 export const fetchRequestStart = (requestID) => ({
   type: requestTypes.FETCH_REQUEST_START,
   payload: requestID,
@@ -28,4 +33,9 @@ export const fetchRequestStart = (requestID) => ({
 export const setRequest = (request) => ({
   type: requestTypes.SET_REQUEST,
   payload: request,
+});
+
+export const setUserRequests = (requests) => ({
+  type: requestTypes.SET_USER_REQUESTS,
+  payload: requests,
 });

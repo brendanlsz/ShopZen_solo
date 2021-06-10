@@ -15,6 +15,49 @@ export const handleAddRequest = (request) => {
   });
 };
 
+export const handleFetchUserRequests = ({
+  userID,
+  startAfterDoc,
+  persistRequests = [],
+}) => {
+  return new Promise((resolve, reject) => {
+    if (!userID) {
+      reject();
+    }
+    const pageSize = 6;
+    let ref = firestore
+      .collection("requests")
+      .limit(pageSize)
+      .where("productAdminUserUID", "==", userID)
+      .orderBy("createdDate");
+    if (startAfterDoc) ref = ref.startAfter(startAfterDoc);
+    ref
+      .get()
+      .then((snapshot) => {
+        const totalCount = snapshot.size;
+        const data = [
+          ...persistRequests,
+          ...snapshot.docs.map((doc) => {
+            return {
+              ...doc.data(),
+              documentID: doc.id,
+            };
+          }),
+        ];
+
+        resolve({
+          data,
+          queryDoc: snapshot.docs[totalCount - 1],
+          isLastPage: totalCount < 1,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        reject(err);
+      });
+  });
+};
+
 export const handleFetchRequests = ({
   filterType,
   startAfterDoc,
@@ -27,7 +70,6 @@ export const handleFetchRequests = ({
       .collection("requests")
       .orderBy("createdDate")
       .limit(pageSize);
-
     if (filterType) ref = ref.where("requestCategory", "==", filterType);
     if (startAfterDoc) ref = ref.startAfter(startAfterDoc);
 

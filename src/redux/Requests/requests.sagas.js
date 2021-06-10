@@ -3,12 +3,14 @@ import { takeLatest, put, all, call } from "redux-saga/effects";
 import {
   setRequests,
   setRequest,
+  setUserRequests,
   fetchRequestsStart,
 } from "./requests.actions";
 import {
   handleAddRequest,
   handleFetchRequests,
   handleFetchRequest,
+  handleFetchUserRequests,
   handleDeleteRequest,
 } from "./requests.helpers";
 import requestsTypes from "./requests.types";
@@ -44,6 +46,19 @@ export function* onFetchRequestsStart() {
   yield takeLatest(requestsTypes.FETCH_REQUESTS_START, fetchRequests);
 }
 
+export function* fetchUserRequests({ payload }) {
+  try {
+    const requests = yield handleFetchUserRequests(payload);
+    yield put(setUserRequests(requests));
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export function* onFetchUserRequestsStart() {
+  yield takeLatest(requestsTypes.FETCH_USER_REQUESTS, fetchUserRequests);
+}
+
 export function* deleteRequest({ payload }) {
   try {
     yield handleDeleteRequest(payload);
@@ -76,5 +91,6 @@ export default function* requestsSagas() {
     call(onFetchRequestsStart),
     call(onDeleteRequestStart),
     call(onFetchRequestStart),
+    call(onFetchUserRequestsStart),
   ]);
 }

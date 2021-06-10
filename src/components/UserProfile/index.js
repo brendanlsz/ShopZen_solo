@@ -1,8 +1,9 @@
-import React from 'react';
-import './styles.scss';
-import userIMG from './../../assets/user.png';
+import React from "react";
+import { useHistory } from "react-router-dom";
+import "./styles.scss";
+import userIMG from "./../../assets/user.png";
 
-const UserProfile = props => {
+const UserProfile = (props) => {
   const { currentUser } = props;
   const { displayName } = currentUser;
 
@@ -15,13 +16,11 @@ const UserProfile = props => {
           </div>
         </li>
         <li>
-          <span className="displayName">
-            {displayName && displayName}
-          </span>
+          <span className="displayName">{displayName && displayName}</span>
         </li>
       </ul>
     </div>
   );
-}
+};
 
 export default UserProfile;

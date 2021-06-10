@@ -1,13 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { signOutUserStart } from './../redux/User/user.actions';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { signOutUserStart } from "./../redux/User/user.actions";
 
-import Header from './../components/Header';
-import VerticalNav from './../components/VerticalNav';
-import Footer from './../components/Footer';
+import Header from "./../components/Header";
+import VerticalNav from "./../components/VerticalNav";
+import Footer from "./../components/Footer";
 
-const DashBoardLayout = props => {
+const DashBoardLayout = (props) => {
   const dispatch = useDispatch();
 
   const signOut = () => {
@@ -22,9 +22,13 @@ const DashBoardLayout = props => {
           <VerticalNav>
             <ul>
               <li>
-                <Link to="/dashboard">
-                  Home
-                </Link>
+                <Link to="/dashboard">Home</Link>
+              </li>
+              <li>
+                <Link to="/dashboard/products">Manage Products</Link>
+              </li>
+              <li>
+                <Link to="/dashboard/requests">Manage Requests</Link>
               </li>
               <li>
                 <span className="signOut" onClick={() => signOut()}>
@@ -34,9 +38,7 @@ const DashBoardLayout = props => {
             </ul>
           </VerticalNav>
         </div>
-        <div className="content">
-          {props.children}
-        </div>
+        <div className="content">{props.children}</div>
       </div>
       <Footer />
     </div>

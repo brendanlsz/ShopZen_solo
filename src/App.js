@@ -5,8 +5,10 @@ import { checkUserSession } from "./redux/User/user.actions";
 
 // components
 import AdminToolbar from "./components/AdminToolbar";
-import ManageProducts from "./components/ManageProducts";
-import ManageRequests from "./components/ManageRequests";
+import ManageProducts from "./components/ManageProducts/Admin";
+import ManageRequests from "./components/ManageRequests/Admin";
+// import UserManageProducts from "./components/ManageProducts/User";
+// import UserManageRequests from "./components/ManageRequests/User";
 
 // hoc
 import WithAuth from "./hoc/withAuth";
@@ -109,9 +111,11 @@ const App = (props) => {
         <Route
           path="/cart"
           render={() => (
-            <MainLayout>
-              <Cart />
-            </MainLayout>
+            <WithAuth>
+              <MainLayout>
+                <Cart />
+              </MainLayout>
+            </WithAuth>
           )}
         />
         <Route
@@ -149,7 +153,18 @@ const App = (props) => {
           )}
         />
         <Route
+          exact
           path="/dashboard"
+          render={() => (
+            <WithAuth>
+              <DashboardLayout>
+                <Dashboard />
+              </DashboardLayout>
+            </WithAuth>
+          )}
+        />
+        <Route
+          path="/dashboard/:listType"
           render={() => (
             <WithAuth>
               <DashboardLayout>
