@@ -39,3 +39,8 @@ export const setUserProducts = (products) => ({
   type: productsTypes.SET_USER_PRODUCTS,
   payload: products,
 });
+
+// export const addUserProductStart = (productData) => ({
+//   type: productsTypes.ADD_NEW_USER_PRODUCT_START,
+//   payload: productData,
+// });

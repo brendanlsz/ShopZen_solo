@@ -78,7 +78,7 @@ const RequestCard = ({}) => {
         ) : (
           <span
             className="requestdetails"
-            dangerouslySetInnerHTML={{ __html: requestDesc }}
+            dangerouslySetInnerHTML={{ __html: requestDetails }}
           ></span>
         )}
       </div>

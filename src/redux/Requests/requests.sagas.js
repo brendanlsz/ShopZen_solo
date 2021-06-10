@@ -5,6 +5,7 @@ import {
   setRequest,
   setUserRequests,
   fetchRequestsStart,
+  fetchUserRequests,
 } from "./requests.actions";
 import {
   handleAddRequest,
@@ -33,10 +34,30 @@ export function* onAddRequestStart() {
   yield takeLatest(requestsTypes.ADD_NEW_REQUEST_START, addRequest);
 }
 
+// export function* addUserRequest({ payload }) {
+//   try {
+//     const timestamp = new Date();
+//     const userid = auth.currentUser.uid;
+//     yield handleAddRequest({
+//       ...payload,
+//       productAdminUserUID: userid,
+//       createdDate: timestamp,
+//     });
+//     yield put(fetchUserRequests(auth.currentUser.uid));
+//   } catch (err) {
+//     // console.log(err);
+//   }
+// }
+
+// export function* onAddUserRequestStart() {
+//   yield takeLatest(requestsTypes.ADD_NEW_USER_REQUEST_START, addUserRequest);
+// }
+
 export function* fetchRequests({ payload }) {
   try {
     const requests = yield handleFetchRequests(payload);
     yield put(setRequests(requests));
+    yield put(fetchUserRequests({ userID: auth.currentUser.uid }));
   } catch (err) {
     // console.log(err);
   }
@@ -46,7 +67,7 @@ export function* onFetchRequestsStart() {
   yield takeLatest(requestsTypes.FETCH_REQUESTS_START, fetchRequests);
 }
 
-export function* fetchUserRequests({ payload }) {
+export function* fetchUserRequestsStart({ payload }) {
   try {
     const requests = yield handleFetchUserRequests(payload);
     yield put(setUserRequests(requests));
@@ -56,13 +77,14 @@ export function* fetchUserRequests({ payload }) {
 }
 
 export function* onFetchUserRequestsStart() {
-  yield takeLatest(requestsTypes.FETCH_USER_REQUESTS, fetchUserRequests);
+  yield takeLatest(requestsTypes.FETCH_USER_REQUESTS, fetchUserRequestsStart);
 }
 
 export function* deleteRequest({ payload }) {
   try {
     yield handleDeleteRequest(payload);
     yield put(fetchRequestsStart());
+    yield put(fetchUserRequests());
   } catch (err) {
     // console.log(err);
   }
@@ -92,5 +114,6 @@ export default function* requestsSagas() {
     call(onDeleteRequestStart),
     call(onFetchRequestStart),
     call(onFetchUserRequestsStart),
+    // call(onAddUserRequestStart),
   ]);
 }

@@ -102,7 +102,7 @@ const ProductCard = ({}) => {
         ) : (
           <span
             className="productdetails"
-            dangerouslySetInnerHTML={{ __html: productDesc }}
+            dangerouslySetInnerHTML={{ __html: productDetails }}
           ></span>
         )}
       </div>

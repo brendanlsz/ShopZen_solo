@@ -4,6 +4,7 @@ import {
   setProducts,
   setProduct,
   fetchProductsStart,
+  fetchUserProducts,
   setUserProducts,
 } from "./products.actions";
 import {
@@ -14,13 +15,15 @@ import {
   handleFetchUserProducts,
 } from "./products.helpers";
 import productsTypes from "./products.types";
+import { onAddUserRequestStart } from "../Requests/requests.sagas";
 
 export function* addProduct({ payload }) {
   try {
     const timestamp = new Date();
+    const userid = auth.currentUser.uid;
     yield handleAddProduct({
       ...payload,
-      productAdminUserUID: auth.currentUser.uid,
+      productAdminUserUID: userid,
       createdDate: timestamp,
     });
     yield put(fetchProductsStart());
@@ -33,7 +36,26 @@ export function* onAddProductStart() {
   yield takeLatest(productsTypes.ADD_NEW_PRODUCT_START, addProduct);
 }
 
-export function* fetchUserProducts({ payload }) {
+// export function* addUserProduct({ payload }) {
+//   try {
+//     const timestamp = new Date();
+//     const userid = auth.currentUser.uid;
+//     yield handleAddProduct({
+//       ...payload,
+//       productAdminUserUID: userid,
+//       createdDate: timestamp,
+//     });
+//     yield put(fetchUserProducts(auth.currentUser.uid));
+//   } catch (err) {
+//     // console.log(err);
+//   }
+// }
+
+// export function* onAddUserProductStart() {
+//   yield takeLatest(productsTypes.ADD_NEW_USER_PRODUCT_START, addUserProduct);
+// }
+
+export function* fetchUserProductsStart({ payload }) {
   try {
     const products = yield handleFetchUserProducts(payload);
     yield put(setUserProducts(products));
@@ -43,13 +65,14 @@ export function* fetchUserProducts({ payload }) {
 }
 
 export function* onFetchUserProductsStart() {
-  yield takeLatest(productsTypes.FETCH_USER_PRODUCTS, fetchUserProducts);
+  yield takeLatest(productsTypes.FETCH_USER_PRODUCTS, fetchUserProductsStart);
 }
 
 export function* fetchProducts({ payload }) {
   try {
     const products = yield handleFetchProducts(payload);
     yield put(setProducts(products));
+    yield put(fetchUserProducts({ userID: auth.currentUser.uid }));
   } catch (err) {
     // console.log(err);
   }
@@ -62,7 +85,10 @@ export function* onFetchProductsStart() {
 export function* deleteProduct({ payload }) {
   try {
     yield handleDeleteProduct(payload);
-    yield put(fetchProductsStart());
+    yield all([
+      put(fetchProductsStart()),
+      put(fetchUserProducts(auth.currentUser.uid)),
+    ]);
   } catch (err) {
     // console.log(err);
   }
@@ -92,5 +118,6 @@ export default function* productsSagas() {
     call(onDeleteProductStart),
     call(onFetchProductStart),
     call(onFetchUserProductsStart),
+    // call(onAddUserProductStart),
   ]);
 }

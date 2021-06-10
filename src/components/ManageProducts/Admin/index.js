@@ -8,6 +8,8 @@ import {
 import LoadMore from "../../LoadMore";
 import Button from "../../forms/Button";
 
+import "./../styles.scss";
+
 const mapState = ({ productsData }) => ({
   products: productsData.products,
 });

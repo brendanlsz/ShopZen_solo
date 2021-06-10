@@ -51,6 +51,12 @@ const Admin = (props) => {
     setProductPrice(0);
     setProductDesc("");
     setProductDetails("");
+    setRequestCategory("");
+    setRequestName("");
+    setRequestThumbnail("");
+    setRequestPrice(0);
+    setRequestDesc("");
+    setRequestDetails("");
   };
 
   const handleProductSubmit = (e) => {
@@ -230,9 +236,9 @@ const Admin = (props) => {
               placeholder="Short description of item requested"
             />
             <label>Details/Specifications(Optional)</label>
-            {/* <CKEditor
+            <CKEditor
               onChange={(evt) => setRequestDetails(evt.editor.getData())}
-            /> */}
+            />
 
             <br />
             <Button type="submit">Add request</Button>

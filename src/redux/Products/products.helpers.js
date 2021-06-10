@@ -59,8 +59,8 @@ export const handleFetchUserProducts = ({
 };
 
 export const handleFetchProducts = ({
-  filterType,
   userID,
+  filterType,
   startAfterDoc,
   persistProducts = [],
 }) => {
@@ -72,7 +72,6 @@ export const handleFetchProducts = ({
       .orderBy("createdDate")
       .limit(pageSize);
 
-    if (userID) ref = ref.where("productAdminUserUID", "==", userID);
     if (filterType) ref = ref.where("productCategory", "==", filterType);
     if (startAfterDoc) ref = ref.startAfter(startAfterDoc);
 

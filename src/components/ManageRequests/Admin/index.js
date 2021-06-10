@@ -8,6 +8,8 @@ import {
 import LoadMore from "../../LoadMore";
 import Button from "../../forms/Button";
 
+import "./../styles.scss";
+
 const mapState = ({ requestsData }) => ({
   requests: requestsData.requests,
 });
@@ -34,7 +36,7 @@ const ManageRequests = () => {
     onLoadMoreEvt: handleLoadMore,
   };
   return (
-    <div className="manageProducts">
+    <div className="manageRequests">
       <table border="0" cellPadding="0" cellSpacing="0">
         <tbody>
           <tr>

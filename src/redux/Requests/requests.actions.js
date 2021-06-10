@@ -39,3 +39,8 @@ export const setUserRequests = (requests) => ({
   type: requestTypes.SET_USER_REQUESTS,
   payload: requests,
 });
+
+// export const addUserRequestStart = (requestData) => ({
+//   type: requestTypes.ADD_NEW_USER_REQUEST_START,
+//   payload: requestData,
+// });
