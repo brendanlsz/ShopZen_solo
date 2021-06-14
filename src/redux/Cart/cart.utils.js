@@ -1,9 +1,15 @@
-import { handleUserCart } from "./../../firebase/utils";
+import { handleUserCart, firestore, auth } from "./../../firebase/utils";
 
 export const existingCartItem = ({ prevCartItems, nextCartItem }) => {
   return prevCartItems.find(
     (cartItem) => cartItem.documentID === nextCartItem.documentID
   );
+};
+
+export const handleClearCart = () => {
+  const newcart = [];
+  handleUserCart(newcart);
+  return newcart;
 };
 
 export const handleAddToCart = ({ prevCartItems, nextCartItem }) => {
@@ -64,4 +70,23 @@ export const handleReduceCartItem = ({ prevCartItems, cartItemToReduce }) => {
   );
   handleUserCart(newCart);
   return newCart;
+};
+
+export const handleFetchCart = () => {
+  return new Promise((resolve, reject) => {
+    firestore
+      .doc(`users/${auth.currentUser.uid}`)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          resolve(doc.data().cart);
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such cart!");
+        }
+      })
+      .catch((err) => {
+        console.log("Error getting cart:", err);
+      });
+  });
 };

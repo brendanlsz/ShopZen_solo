@@ -19,7 +19,11 @@ export const clearCart = () => ({
   type: cartTypes.CLEAR_CART,
 });
 
-export const fetchCart = (cart) => ({
+export const fetchCart = () => ({
   type: cartTypes.FETCH_CART,
+});
+
+export const setCart = (cart) => ({
+  type: cartTypes.SET_CART,
   payload: cart,
 });
