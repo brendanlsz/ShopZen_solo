@@ -18,13 +18,12 @@ const Dashboard = (props) => {
   const { currentUser, orderHistory } = useSelector(mapState);
 
   useEffect(() => {
-    if (listType) {
-      dispatch(getUserOrderHistory(currentUser.id));
-    }
+    dispatch(getUserOrderHistory(currentUser.id));
   }, []);
 
   return (
     <div>
+      <h1>Wallet: ${currentUser.wallet}</h1>
       {listType === "requests" ? (
         <UserManageRequests />
       ) : listType === "products" ? (

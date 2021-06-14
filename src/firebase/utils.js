@@ -23,6 +23,7 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
     const timestamp = new Date();
     const userRoles = ["user"];
     const cart = [];
+    const wallet = 0;
 
     try {
       await userRef.set({
@@ -31,6 +32,7 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
         createdDate: timestamp,
         userRoles,
         cart,
+        wallet,
         ...additionalData,
       });
     } catch (err) {

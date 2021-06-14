@@ -33,22 +33,22 @@ const Header = (props) => {
 
   useEffect(() => {
     if (currentUser) {
-      firestore
-        .doc(`users/${currentUser.id}`)
-        .get()
-        .then((doc) => {
-          console.log(doc);
-          if (doc.exists) {
-            const cart = doc.data().cart;
-            dispatch(fetchCart(cart));
-          } else {
-            // doc.data() will be undefined in this case
-            console.log("No such cart!");
-          }
-        })
-        .catch((err) => {
-          console.log("Error getting cart:", err);
-        });
+      // firestore
+      //   .doc(`users/${currentUser.id}`)
+      //   .get()
+      //   .then((doc) => {
+      //     if (doc.exists) {
+      //       const cart = doc.data().cart;
+      //       dispatch(fetchCart(cart));
+      //     } else {
+      //       // doc.data() will be undefined in this case
+      //       console.log("No such cart!");
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.log("Error getting cart:", err);
+      //   });
+      dispatch(fetchCart());
     }
   }, [currentUser]);
   return (
