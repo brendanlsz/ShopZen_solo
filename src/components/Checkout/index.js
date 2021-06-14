@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   selectCartItems,
   selectCartTotal,
@@ -9,23 +9,16 @@ import { createStructuredSelector } from "reselect";
 import "./styles.scss";
 import Button from "./../forms/Button";
 import Item from "./Item";
-import { fetchCart } from "../../redux/Cart/cart.actions";
 
 const mapState = createStructuredSelector({
   cartItems: selectCartItems,
   total: selectCartTotal,
 });
 
-const Checkout = ({}) => {
-  const dispatch = useDispatch();
+const Checkout = () => {
   const history = useHistory();
   const { cartItems, total } = useSelector(mapState);
-
   const errMsg = "You have no items in your cart.";
-
-  useEffect(() => {
-    dispatch(fetchCart);
-  });
 
   return (
     <div className="checkout">

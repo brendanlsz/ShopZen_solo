@@ -43,27 +43,32 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
   return userRef;
 };
 
-export const handleUserCart = async (cart) => {
-  const currentUser = auth.currentUser;
-  if (!currentUser) return;
-  const { uid } = currentUser;
-  const userRef = await firestore.collection("users").doc(`${uid}`);
-  userRef
-    .get()
-    .then((doc) => {
-      if (doc.exists) {
-        firestore.doc(`users/${uid}`).set({
-          ...doc.data(),
-          cart: cart,
-        });
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
-    })
-    .catch((error) => {
-      console.log("Error getting document:", error);
-    });
+export const handleUserCart = (cart) => {
+  return new Promise((resolve, reject) => {
+    const currentUser = auth.currentUser;
+    if (!currentUser) return;
+    const { uid } = currentUser;
+    const userRef = firestore.collection("users").doc(`${uid}`);
+    userRef
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          firestore.doc(`users/${uid}`).set({
+            ...doc.data(),
+            cart: cart,
+          });
+          resolve();
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+          reject();
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+        reject();
+      });
+  });
 };
 
 export const getCurrentUser = () => {
