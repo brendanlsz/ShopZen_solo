@@ -8,6 +8,7 @@ import {
 import Button from "./../forms/Button";
 import "./styles.scss";
 import Request from "./../Request";
+import { getUserEmail } from "../../firebase/utils";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -26,15 +27,24 @@ const RequestCard = ({}) => {
     requestPrice,
     requestDesc,
     requestDetails,
+    productAdminUserUID,
   } = request;
 
   useEffect(() => {
     dispatch(fetchRequestStart(requestID));
-
     return () => {
       dispatch(setRequest({}));
     };
   }, []);
+
+  const handleClick = async () => {
+    try {
+      const email = await getUserEmail(productAdminUserUID);
+      console.log(email);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="productCard ">
@@ -63,7 +73,7 @@ const RequestCard = ({}) => {
                 </p>
               </li>
               <li>
-                <Button>Contact Buyer</Button>
+                <Button onClick={() => handleClick()}>Contact Buyer</Button>
               </li>
             </ul>
           </div>
