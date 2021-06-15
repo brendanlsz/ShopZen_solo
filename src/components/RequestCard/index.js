@@ -42,7 +42,7 @@ const RequestCard = ({}) => {
       const email = await getUserEmail(productAdminUserUID);
       console.log(email);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
