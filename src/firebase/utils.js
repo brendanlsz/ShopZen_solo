@@ -79,3 +79,23 @@ export const getCurrentUser = () => {
     }, reject);
   });
 };
+
+export const getUserEmail = () => {
+  return new Promise((resolve, reject) => {
+    const currentUser = auth.currentUser;
+    if (!currentUser) return;
+    const { uid } = currentUser;
+    firestore
+      .doc(`users/${uid}`)
+      .get()
+      .then((doc) => {
+        const userref = doc.data();
+        const { email } = userref;
+        resolve(email);
+      })
+      .catch((err) => {
+        console.log(err);
+        reject(err);
+      });
+  });
+};

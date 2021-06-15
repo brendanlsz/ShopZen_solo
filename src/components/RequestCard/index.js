@@ -8,6 +8,7 @@ import {
 import Button from "./../forms/Button";
 import "./styles.scss";
 import Request from "./../Request";
+import { getUserEmail } from "../../firebase/utils";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -30,6 +31,15 @@ const RequestCard = ({}) => {
 
   useEffect(() => {
     dispatch(fetchRequestStart(requestID));
+    const getData = async () => {
+      try {
+        const email = await getUserEmail();
+        console.log(email);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getData();
 
     return () => {
       dispatch(setRequest({}));
