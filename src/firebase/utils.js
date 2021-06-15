@@ -80,11 +80,8 @@ export const getCurrentUser = () => {
   });
 };
 
-export const getUserEmail = () => {
+export const getUserEmail = (uid) => {
   return new Promise((resolve, reject) => {
-    const currentUser = auth.currentUser;
-    if (!currentUser) return;
-    const { uid } = currentUser;
     firestore
       .doc(`users/${uid}`)
       .get()

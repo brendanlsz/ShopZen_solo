@@ -27,24 +27,24 @@ const RequestCard = ({}) => {
     requestPrice,
     requestDesc,
     requestDetails,
+    productAdminUserUID,
   } = request;
 
   useEffect(() => {
     dispatch(fetchRequestStart(requestID));
-    const getData = async () => {
-      try {
-        const email = await getUserEmail();
-        console.log(email);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getData();
-
     return () => {
       dispatch(setRequest({}));
     };
   }, []);
+
+  const handleClick = async () => {
+    try {
+      const email = await getUserEmail(productAdminUserUID);
+      console.log(email);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="productCard ">
@@ -73,7 +73,7 @@ const RequestCard = ({}) => {
                 </p>
               </li>
               <li>
-                <Button>Contact Buyer</Button>
+                <Button onClick={() => handleClick()}>Contact Buyer</Button>
               </li>
             </ul>
           </div>
